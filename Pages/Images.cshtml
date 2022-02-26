@@ -1,0 +1,23 @@
+﻿@page
+@model ImagesModel
+@{
+    ViewData["Title"] = "Images Viewer";
+
+    string rootPath = "W:\\Lab\\ImageViewer\\root-folder";
+    var files = System.IO.Directory.GetFiles(rootPath+"\\0a1b528c-d712-44b3-be8a-e3d42c582088");
+
+    var fileNames = files.Select(path => {
+        System.IO.FileInfo dir_info = new System.IO.FileInfo(path);
+        return dir_info.Name;
+        }).ToArray();
+}
+
+<div class="text-center">
+    <h1 class="display-4">Images Viewer</h1>
+    <ul>
+        @foreach (string name in fileNames) 
+        {
+            <li>🖼@name</li>
+        }
+    </ul>
+</div>

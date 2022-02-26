@@ -1,10 +1,25 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Folders Viewer";
+
+    string rootPath = "W:\\Lab\\ImageViewer\\root-folder";
+    var folders = System.IO.Directory.GetDirectories(rootPath);
+
+    folders = folders.Select(path => {
+        System.IO.DirectoryInfo dir_info = new System.IO.DirectoryInfo(path);
+        return dir_info.Name; 
+        }).ToArray();
+    
+    //var owners = System.IO.File.ReadAllLines(@"..\data\Owners.txt");
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Folders Viewer</h1>
+    <ul>
+        @foreach (string name in folders) 
+        {
+            <li>📁@name</li>
+        }
+    </ul>
 </div>
