@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Folders Viewer";
 
-    string rootPath = "W:\\Lab\\ImageViewer\\root-folder";
+    string rootPath = "W:\\Lab\\ImageViewer\\wwwroot\\root-folder";
     var folders = System.IO.Directory.GetDirectories(rootPath);
 
     folders = folders.Select(path => {

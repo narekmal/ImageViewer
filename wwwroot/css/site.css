@@ -16,3 +16,31 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li a {
+  cursor: pointer;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.img-wrapper {
+  overflow: hidden;
+}
+
+.js-initial-state,
+.js-download {
+  cursor: pointer;
+  display: none;
+}
+
+.js-initial-state {
+  margin-right: 10px;
+}
