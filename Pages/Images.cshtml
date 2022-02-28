@@ -3,9 +3,10 @@
 @{
     ViewData["Title"] = "Images Viewer";
 
+    string folder = HttpContext.Request.Query["folder"].ToString();
 
     string wwwRootPath = "W:\\Lab\\ImageViewer\\wwwroot";
-    var files = System.IO.Directory.GetFiles(wwwRootPath + "\\root-folder\\0a1b528c-d712-44b3-be8a-e3d42c582088");
+    var files = System.IO.Directory.GetFiles(wwwRootPath + "\\root-folder\\" + folder);
 
     var fileNames = files.Select(path => {
         System.IO.FileInfo dir_info = new System.IO.FileInfo(path);
@@ -21,7 +22,7 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Images Viewer</h1>
+    <h1 class="display-4">Image Viewer</h1>
     <ul>
         @for (int i = 0; i < fileNames.Length; i++)
         {

@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Folders Viewer";
+    ViewData["Title"] = "Folder Viewer";
 
     string rootPath = "W:\\Lab\\ImageViewer\\wwwroot\\root-folder";
     var folders = System.IO.Directory.GetDirectories(rootPath);
@@ -19,7 +19,9 @@
     <ul>
         @foreach (string name in folders) 
         {
-            <li>📁@name</li>
+            <li>
+                📁<a href="/Images?folder=@name">@name</a>
+            </li>
         }
     </ul>
 </div>
