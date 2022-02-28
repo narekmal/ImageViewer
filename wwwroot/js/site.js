@@ -9,14 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const target = e.target;
         const imgUrl = target.getAttribute('data-href');
         const downloadLink = document.querySelector(".js-download");
+        const initialStateLink = document.querySelector(".js-initial-state");
+        const imgWrapper = document.querySelector(".img-wrapper");
 
         selectedImage.setAttribute('src', imgUrl);
+        imgWrapper.classList.add('loading');
+        downloadLink.style.display = "none";
+        initialStateLink.style.display = "none";
+        selectedImage.onload = ()=>{
+            imgWrapper.classList.remove('loading');
+            downloadLink.style.display = "inline";
+            initialStateLink.style.display = "inline";
+        };
         selectedImage.setAttribute('data-width', target.getAttribute('data-width'));
         selectedImage.setAttribute('data-height', target.getAttribute('data-height'));
 
-        downloadLink.style.display = "inline";
         downloadLink.setAttribute("href", imgUrl);
-        document.querySelector(".js-initial-state").style.display = "inline";
     };
 
     const handleWheel = e => {

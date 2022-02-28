@@ -35,6 +35,18 @@ li a {
   overflow: hidden;
 }
 
+.img-wrapper span {
+  display: none;
+}
+
+.img-wrapper.loading span {
+  display: inline;
+}
+
+.img-wrapper.loading img { 
+  display: none;
+}
+
 .js-initial-state,
 .js-download {
   cursor: pointer;
