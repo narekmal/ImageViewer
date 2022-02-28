@@ -6,18 +6,17 @@
 document.addEventListener("DOMContentLoaded", () => { 
 
     const handleImageClick = e => {
-        const imgUrl = e.target.getAttribute('data-href');
+        const target = e.target;
+        const imgUrl = target.getAttribute('data-href');
         const downloadLink = document.querySelector(".js-download");
 
         selectedImage.setAttribute('src', imgUrl);
+        selectedImage.setAttribute('data-width', target.getAttribute('data-width'));
+        selectedImage.setAttribute('data-height', target.getAttribute('data-height'));
 
         downloadLink.style.display = "inline";
         downloadLink.setAttribute("href", imgUrl);
         document.querySelector(".js-initial-state").style.display = "inline";
-        // const clickedCard = e.target.closest(".js-card")
-        // cards.forEach(card => {
-        //     card.isSameNode(clickedCard) ? card.classList.remove("js-invert-colors") : card.classList.add("js-invert-colors");
-        // });
     };
 
     const handleWheel = e => {
@@ -33,11 +32,24 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleMouseMove = e => {
-        console.log('mouse move', e);
+        if (scale == 1)
+            return;
+        
+        var width = parseInt(selectedImage.getAttribute('data-width'));
+        var height = parseInt(selectedImage.getAttribute('data-height'));
+        var xShift = e.offsetX - width/2;
+        var yShift = e.offsetY - height/2;
+        var outerWidth = width * (scale-1);
+        var outerHeight = height * (scale-1);
+        var translateX = Math.floor((xShift/outerWidth) * 100);
+        var translateY = Math.floor((yShift/outerHeight) * 100);
+
+        selectedImage.style.transform = `scale(${scale}) translate(${translateX}%, ${translateY}%)`;
     };
 
     const handleInitialStateClick = e => {
         selectedImage.style.transform = `scale(1)`;
+        scale = 1;
     };
 
     const images = document.querySelectorAll(".js-image");
@@ -45,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const selectedImage = document.querySelector(".js-selected-image");
     selectedImage.onwheel = handleWheel;
-    let scale = 1;
     selectedImage.onmousemove = handleMouseMove;
     document.querySelector(".js-initial-state").onclick = handleInitialStateClick;
+    let scale = 1;
 });

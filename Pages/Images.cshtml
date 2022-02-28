@@ -25,7 +25,9 @@
     <ul>
         @for (int i = 0; i < fileNames.Length; i++)
         {
-            <li>🖼<a class="js-image" data-href=@fileUrls[i]>@fileNames[i] (@fileSizes[i].Item1 x @fileSizes[i].Item2)</a></li>
+            <li>
+                🖼<a class="js-image" data-href=@fileUrls[i] data-width=@fileSizes[i].Item1 data-height=@fileSizes[i].Item2>@fileNames[i] (@fileSizes[i].Item1 x @fileSizes[i].Item2)</a>
+            </li>
         }
     </ul>
     <div class="img-container">
