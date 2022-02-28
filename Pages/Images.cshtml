@@ -3,12 +3,18 @@
 @{
     ViewData["Title"] = "Images Viewer";
 
+
     string wwwRootPath = "W:\\Lab\\ImageViewer\\wwwroot";
     var files = System.IO.Directory.GetFiles(wwwRootPath + "\\root-folder\\0a1b528c-d712-44b3-be8a-e3d42c582088");
 
     var fileNames = files.Select(path => {
         System.IO.FileInfo dir_info = new System.IO.FileInfo(path);
         return dir_info.Name;
+        }).ToArray();
+
+    var fileSizes = files.Select(path => {
+        var img = System.Drawing.Bitmap.FromFile(path);
+        return new Tuple<int, int>(img.Width, img.Height);
         }).ToArray();
 
     var fileUrls = files.Select(path => path.Replace(wwwRootPath, "")).ToArray();
@@ -19,7 +25,7 @@
     <ul>
         @for (int i = 0; i < fileNames.Length; i++)
         {
-            <li>🖼<a class="js-image" data-href=@fileUrls[i]>@fileNames[i]</a></li>
+            <li>🖼<a class="js-image" data-href=@fileUrls[i]>@fileNames[i] (@fileSizes[i].Item1 x @fileSizes[i].Item2)</a></li>
         }
     </ul>
     <div class="img-container">

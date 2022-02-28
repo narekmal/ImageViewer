@@ -4,10 +4,8 @@
 // Write your JavaScript code.
 
 document.addEventListener("DOMContentLoaded", () => { 
-    const images = document.querySelectorAll(".js-image");
 
     const handleImageClick = e => {
-        const selectedImage = document.querySelector(".js-selected-image");
         const imgUrl = e.target.getAttribute('data-href');
         const downloadLink = document.querySelector(".js-download");
 
@@ -20,7 +18,34 @@ document.addEventListener("DOMContentLoaded", () => {
         // cards.forEach(card => {
         //     card.isSameNode(clickedCard) ? card.classList.remove("js-invert-colors") : card.classList.add("js-invert-colors");
         // });
-    }
+    };
 
-    images.forEach(card => card.addEventListener("click", handleImageClick));
+    const handleWheel = e => {
+        e.preventDefault();
+
+        scale += e.deltaY * -0.01;
+
+        // Restrict scale
+        scale = Math.min(Math.max(1, scale), 4);
+
+        // Apply scale transform
+        selectedImage.style.transform = `scale(${scale})`;
+    };
+
+    const handleMouseMove = e => {
+        console.log('mouse move', e);
+    };
+
+    const handleInitialStateClick = e => {
+        selectedImage.style.transform = `scale(1)`;
+    };
+
+    const images = document.querySelectorAll(".js-image");
+    images.forEach(image => image.addEventListener("click", handleImageClick));
+
+    const selectedImage = document.querySelector(".js-selected-image");
+    selectedImage.onwheel = handleWheel;
+    let scale = 1;
+    selectedImage.onmousemove = handleMouseMove;
+    document.querySelector(".js-initial-state").onclick = handleInitialStateClick;
 });
