@@ -5,13 +5,15 @@
 
     string rootPath = "W:\\Lab\\ImageViewer\\wwwroot\\root-folder";
     var folders = System.IO.Directory.GetDirectories(rootPath);
+    var blackList = System.IO.File.ReadAllLines(rootPath + "\\black-list.txt");
 
     folders = folders.Select(path => {
-        System.IO.DirectoryInfo dir_info = new System.IO.DirectoryInfo(path);
-        return dir_info.Name; 
-        }).ToArray();
+        System.IO.DirectoryInfo dirInfo = new System.IO.DirectoryInfo(path);
+        return dirInfo.Name; 
+        }).
+        Where(folderName => !blackList.Contains(folderName))
+        .ToArray();
     
-    //var owners = System.IO.File.ReadAllLines(@"..\data\Owners.txt");
 }
 
 <div class="text-center">
