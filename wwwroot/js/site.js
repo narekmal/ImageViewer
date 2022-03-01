@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (selectedImage) {
         selectedImage.onwheel = handleWheel;
         selectedImage.onmousemove = handleMouseMove;
+        document.querySelector(".js-initial-state").onclick = handleInitialStateClick;
     }
-    document.querySelector(".js-initial-state").onclick = handleInitialStateClick;
     let scale = 1;
 });

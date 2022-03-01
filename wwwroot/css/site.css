@@ -56,3 +56,11 @@ li a {
 .js-initial-state {
   margin-right: 10px;
 }
+
+.folders-limit {
+  display: inline;
+}
+
+.folders-limit input {
+  width: 40px;
+}

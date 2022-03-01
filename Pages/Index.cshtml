@@ -7,11 +7,17 @@
     var folders = System.IO.Directory.GetDirectories(rootPath);
     var blackList = System.IO.File.ReadAllLines(rootPath + "\\black-list.txt");
 
+    string foldersLimitStr = HttpContext.Request.Query["folders_limit"];
+    foldersLimitStr = (String.IsNullOrEmpty(foldersLimitStr) ? "10" : foldersLimitStr);
+    int foldersLimit = int.Parse(foldersLimitStr);
+    foldersLimit = Math.Max(1, foldersLimit);
+
     folders = folders.Select(path => {
         System.IO.DirectoryInfo dirInfo = new System.IO.DirectoryInfo(path);
         return dirInfo.Name; 
-        }).
-        Where(folderName => !blackList.Contains(folderName))
+        })
+        .Where(folderName => !blackList.Contains(folderName))
+        .Take(foldersLimit)
         .ToArray();
     
 }
@@ -26,4 +32,5 @@
             </li>
         }
     </ul>
+    <div>Display first <form action="/" class="folders-limit" method="get"><input type="number" name="folders_limit" value="@foldersLimit"></form> folders</div>
 </div>
