@@ -14,6 +14,6 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-
+        _logger.LogInformation($"Folder viewer page visited at {DateTime.UtcNow.ToLongTimeString()}");
     }
 }

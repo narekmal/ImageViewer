@@ -14,6 +14,7 @@ public class ImagesModel : PageModel
 
     public void OnGet()
     {
+        _logger.LogInformation($"Image viewer page visited at {DateTime.UtcNow.ToLongTimeString()}");
     }
 }
 
