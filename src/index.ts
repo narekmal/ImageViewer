@@ -1,4 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const handleImageClick = e => {
         const target = e.target;
         const imgUrl = target.getAttribute('data-href');
-        const downloadLink = document.querySelector(".js-download");
-        const initialStateLink = document.querySelector(".js-initial-state");
-        const imgWrapper = document.querySelector(".img-wrapper");
+        const downloadLink = document.querySelector<HTMLElement>(".js-download");
+        const initialStateLink = document.querySelector<HTMLElement>(".js-initial-state");
+        const imgWrapper = document.querySelector<HTMLElement>(".img-wrapper");
 
         selectedImage.setAttribute('src', imgUrl);
         imgWrapper.classList.add('loading');
@@ -63,11 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const images = document.querySelectorAll(".js-image");
     images.forEach(image => image.addEventListener("click", handleImageClick));
 
-    const selectedImage = document.querySelector(".js-selected-image");
+    const selectedImage = document.querySelector<HTMLElement>(".js-selected-image");
     if (selectedImage) {
         selectedImage.onwheel = handleWheel;
         selectedImage.onmousemove = handleMouseMove;
-        document.querySelector(".js-initial-state").onclick = handleInitialStateClick;
+        document.querySelector<HTMLElement>(".js-initial-state").onclick = handleInitialStateClick;
     }
     let scale = 1;
 });

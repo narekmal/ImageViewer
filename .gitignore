@@ -1,3 +1,5 @@
 bin
 obj
 root-folder
+node_modules
+wwwroot/dist
