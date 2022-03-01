@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Folder Viewer";
 
-    string rootPath = "W:\\Lab\\ImageViewer\\wwwroot\\root-folder";
+    string rootPath = Directory.GetCurrentDirectory() + "\\wwwroot\\root-folder";
     var folders = System.IO.Directory.GetDirectories(rootPath);
     var blackList = System.IO.File.ReadAllLines(rootPath + "\\black-list.txt");
 

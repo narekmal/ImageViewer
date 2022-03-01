@@ -5,7 +5,7 @@
 
     string folder = HttpContext.Request.Query["folder"].ToString();
 
-    string wwwRootPath = "W:\\Lab\\ImageViewer\\wwwroot";
+    string wwwRootPath = Directory.GetCurrentDirectory() + "\\wwwroot";
     var files = System.IO.Directory.GetFiles(wwwRootPath + "\\root-folder\\" + folder);
 
     var fileNames = files.Select(path => {
