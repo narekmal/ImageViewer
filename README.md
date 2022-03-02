@@ -1,7 +1,8 @@
 # Image Viewer
 
 ## Installation
-The root folder of images should be resided inside *wwwroot* directory of the project.
+* The root folder of images should be resided inside *wwwroot* directory of the project
+* Typescript can be built with *npm run build-ts*
 
 ## Implementation details
 * Logging functionality provided by .NET Generic Host in ASP.NET Core is used 
