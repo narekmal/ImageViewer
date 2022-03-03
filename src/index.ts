@@ -42,17 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const handleMouseMove = e => {
         if (scale == 1)
             return;
-        
+
         var width = parseInt(selectedImage.getAttribute('data-width'));
         var height = parseInt(selectedImage.getAttribute('data-height'));
-        var xShift = e.offsetX - width/2;
-        var yShift = e.offsetY - height/2;
+        var xShift = e.clientX - selectedImage.offsetLeft - width/2;
+        var yShift = e.clientY - selectedImage.offsetTop - height/2;
         var outerWidth = width * (scale-1);
         var outerHeight = height * (scale-1);
-        var translateX = Math.floor((xShift/outerWidth) * 100);
-        var translateY = Math.floor((yShift/outerHeight) * 100);
+        var translateX = Math.min(Math.max(-outerWidth/(2*scale), xShift), outerWidth/(2*scale));
+        var translateY = Math.min(Math.max(-outerHeight/(2*scale), yShift), outerHeight/(2*scale));
 
-        selectedImage.style.transform = `scale(${scale}) translate(${translateX}%, ${translateY}%)`;
+        selectedImage.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
     };
 
     const handleInitialStateClick = e => {
@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedImage = document.querySelector<HTMLElement>(".js-selected-image");
     if (selectedImage) {
         selectedImage.onwheel = handleWheel;
-        selectedImage.onmousemove = handleMouseMove;
         document.querySelector<HTMLElement>(".js-initial-state").onclick = handleInitialStateClick;
+        document.querySelector<HTMLElement>(".img-wrapper").onmousemove = handleMouseMove;
     }
     let scale = 1;
 });

@@ -33,6 +33,7 @@ li a {
 
 .img-wrapper {
   overflow: hidden;
+  border: 1px dashed black;
 }
 
 .img-wrapper span {
