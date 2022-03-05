@@ -25,3 +25,21 @@ code {
 .image-icon {
   color: green
 }
+
+.selected-image {
+  margin-top: 25px;
+}
+
+.initial-state {
+  margin-right: 15px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.image-wrapper {
+  overflow: hidden;
+  border: 1px dashed black;
+}
