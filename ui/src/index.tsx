@@ -12,7 +12,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Folders />} />
-        <Route path="images/:folderName" element={<Images />} ></Route>
+        <Route path="images/:folder" element={<Images />} ></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
