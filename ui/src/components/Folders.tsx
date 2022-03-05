@@ -5,7 +5,7 @@ export default class Folders extends Component {
 
   state = {
     folderNames: [],
-    folderLimit: 10
+    foldersLimit: 10
   }
 
   constructor(props:any) {
@@ -19,17 +19,31 @@ export default class Folders extends Component {
       <div>
         <h1>Folder Viewer</h1> 
         {links}
+        
+        {this.state.folderNames.length != 0 && 
+        <div className='folders-limit'>
+          Display first 
+          <input 
+            type="number" 
+            value={this.state.foldersLimit} 
+            onChange={e=>{if(e.target.value as unknown as number > 0) this.setState({foldersLimit: e.target.value})}} 
+            onKeyPress={e=>{if(e.which == 13) this.fetchFolderNames()}} /> 
+          folders
+        </div>}
+
+        {this.state.folderNames.length == 0 && 
+        <div>Loading...</div>}
       </div>
     )
   }
 
   fetchFolderNames() {
-    fetch(`/Main/Folders`, {
+    this.setState({folderNames: []});
+    fetch(`/Main/Folders?folders_limit=${this.state.foldersLimit}`, {
         method: 'GET'
       })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         this.setState({folderNames: json})
       })
       .catch(err => console.log(err));

@@ -12,3 +12,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.folders-limit {
+  margin-top: 20px;
+}
+
+.folders-limit input {
+  width: 50px;
+  margin: 0 7px;
+}
