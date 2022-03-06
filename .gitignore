@@ -4,3 +4,4 @@ root-folder
 node_modules
 wwwroot/dist
 .vscode
+logs

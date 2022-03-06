@@ -17,7 +17,7 @@ public class MainController : ControllerBase
     [HttpGet]
     public string[] Folders()
     {
-        _logger.LogInformation($"Folders requested at {DateTime.UtcNow.ToLongTimeString()}");
+        _logger.LogInformation($"Folders requested");
 
         string rootPath = Directory.GetCurrentDirectory() + "\\root-folder";
         var folders = Directory.GetDirectories(rootPath);
@@ -46,6 +46,8 @@ public class MainController : ControllerBase
     {
         string folder = HttpContext.Request.Query["folder"].ToString();
 
+        _logger.LogInformation($"Images requested for folder " + folder);
+
         string wwwRootPath = Directory.GetCurrentDirectory();
         var files = System.IO.Directory.GetFiles(wwwRootPath + "\\root-folder\\" + folder);
 
@@ -68,6 +70,9 @@ public class MainController : ControllerBase
     {
         string folder = HttpContext.Request.Query["folder"].ToString();
         string imageName = HttpContext.Request.Query["image"].ToString();
+
+        _logger.LogInformation($"Image requested, folder: " + folder + ", image: " + imageName);
+
         string wwwRootPath = Directory.GetCurrentDirectory();
         var image = System.IO.File.OpenRead(wwwRootPath + "\\root-folder\\" + folder + "\\" + imageName);
         string contentType = imageName.EndsWith("svg") ? "image/svg+xml" : "image/jpeg";
