@@ -5,7 +5,7 @@ import SelectedImage from './SelectedImage';
 class Images extends Component {
 
   state = {
-    imageInfo: [] as Array<any>,
+    imageInfo: null as unknown as Array<any>,
     selectedImage: null as any
   }
 
@@ -17,7 +17,7 @@ class Images extends Component {
   }
 
   render() {
-    let links = this.state.imageInfo.map(info => 
+    let links = this.state.imageInfo ? this.state.imageInfo.map(info => 
       <div key={info.item1}>
         <span className='image-icon'>🖼</span><a 
             href=""
@@ -25,7 +25,7 @@ class Images extends Component {
             >
             {info.item1} {this.getDimensionsString(info.item2, info.item3)}
           </a>
-      </div>);
+      </div>) : [];
 
     return (
       <div>
@@ -38,7 +38,7 @@ class Images extends Component {
           width={this.state.selectedImage ? this.state.selectedImage.width : null} 
           height={this.state.selectedImage ? this.state.selectedImage.height : null} 
         />
-        {this.state.imageInfo.length == 0 && 
+        {!this.state.imageInfo && 
         <div>Loading...</div>}
       </div>
     )
@@ -56,7 +56,7 @@ class Images extends Component {
       .then(res => res.json())
       .then(json => {
         this.setState({imageInfo: json});
-      })
+  })
       .catch(err => console.log(err));
   }
 
