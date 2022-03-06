@@ -40,15 +40,18 @@ export default class SelectedImage extends Component<IProps> {
         </div>
         <div className="actions">
           <a className="initial-state" href="" onClick={this.handleInitialStateClick.bind(this)}>Initial State</a>
-          <a href={this.constructImageUrl()} download>Download</a>
+          <a href={this.constructImageUrl(true)} download>Download</a>
         </div>
         <div className="loading-message">Loading...</div>
       </div>
     );
   }
 
-  constructImageUrl() {
-    return `/Main/Image?folder=${this.props.folder}&image=${this.props.name}`;
+  constructImageUrl(forDownload = false) {
+    let url = `/Main/Image?folder=${this.props.folder}&image=${this.props.name}`;
+    if (forDownload)
+      url = "https://localhost:7116" + url;
+    return url;
   }
 
   handleWheel(e:any) {
