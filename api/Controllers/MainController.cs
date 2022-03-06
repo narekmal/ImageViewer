@@ -19,7 +19,9 @@ public class MainController : ControllerBase
     {
         string rootPath = Directory.GetCurrentDirectory() + "\\root-folder";
         var folders = Directory.GetDirectories(rootPath);
-        var blackList = System.IO.File.ReadAllLines(rootPath + "\\black-list.txt");
+
+        string[] blackList = System.IO.File.ReadAllLines(rootPath + "\\black-list.txt");
+        Array.Sort(blackList);
 
         string foldersLimitStr = HttpContext.Request.Query["folders_limit"];
         foldersLimitStr = (String.IsNullOrEmpty(foldersLimitStr) ? "10" : foldersLimitStr);
@@ -30,7 +32,7 @@ public class MainController : ControllerBase
                 DirectoryInfo dirInfo = new DirectoryInfo(path);
                 return dirInfo.Name; 
             })
-            .Where(folderName => !blackList.Contains(folderName))
+            .Where(folderName => Array.BinarySearch(blackList, folderName) < 0)
             .Take(foldersLimit)
             .ToArray();
 
