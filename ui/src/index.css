@@ -35,6 +35,19 @@ code {
   height: 200px;
 }
 
+.selected-image.loading .image-container,
+.selected-image.loading .actions {
+  display: none;
+}
+
+.selected-image.loading .loading-message {
+  display: block;
+} 
+
+.selected-image .loading-message {
+  display: none;
+}
+
 .initial-state {
   margin-right: 15px;
 }

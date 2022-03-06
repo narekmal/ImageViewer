@@ -9,6 +9,10 @@ interface IProps {
 
 export default class SelectedImage extends Component<IProps> {
 
+  state = {
+    imageIsLoading: false
+  }
+
   constructor(props: any) {
     super(props);
     this.imageEl = null;
@@ -21,7 +25,7 @@ export default class SelectedImage extends Component<IProps> {
   render() {
     return (
       this.props.name &&
-      <div className="selected-image">
+      <div className={"selected-image" + (this.state.imageIsLoading ? " loading" : "")}>
         <div className="image-container">
           <div className="image-wrapper">
             <img 
@@ -29,14 +33,16 @@ export default class SelectedImage extends Component<IProps> {
               src={this.constructImageUrl()} 
               onWheel={this.handleWheel.bind(this)} 
               onMouseMove={this.handleMouseMove.bind(this)} 
+              onLoad={this.handleLoad.bind(this)}
               ref={el => this.imageEl = el} 
               alt="" />
           </div>
         </div>
-        <div>
+        <div className="actions">
           <a className="initial-state" href="" onClick={this.handleInitialStateClick.bind(this)}>Initial State</a>
           <a href={this.constructImageUrl()} download>Download</a>
         </div>
+        <div className="loading-message">Loading...</div>
       </div>
     );
   }
@@ -75,9 +81,21 @@ export default class SelectedImage extends Component<IProps> {
   }
 
   handleInitialStateClick(e:any) {
-    e.preventDefault();
+    if(e)
+      e.preventDefault();
     this.scale = 1;
     if(this.imageEl)
       this.imageEl.style.transform = `scale(${this.scale})`;
+  }
+
+  handleLoad() {
+    this.setState({imageIsLoading: false});
+  }
+
+  componentDidUpdate(prevProps:any) {
+    if (prevProps.name != this.props.name) {
+      this.handleInitialStateClick(null);
+      this.setState({imageIsLoading: true});
+    }
   }
 }
