@@ -14,9 +14,11 @@ public class MainController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet(Name = "Folders")]
+    [HttpGet]
     public string[] Folders()
     {
+        _logger.LogInformation($"Folders requested at {DateTime.UtcNow.ToLongTimeString()}");
+
         string rootPath = Directory.GetCurrentDirectory() + "\\root-folder";
         var folders = Directory.GetDirectories(rootPath);
 
@@ -39,7 +41,7 @@ public class MainController : ControllerBase
         return folders;
     }
 
-    [HttpGet(Name = "Images")]
+    [HttpGet]
     public Tuple<string, int, int>[] Images()
     {
         string folder = HttpContext.Request.Query["folder"].ToString();

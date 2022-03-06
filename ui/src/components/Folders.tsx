@@ -10,7 +10,6 @@ export default class Folders extends Component {
 
   constructor(props:any) {
     super(props);
-    this.fetchFolderNames();
   }
 
   render() {
@@ -35,6 +34,10 @@ export default class Folders extends Component {
         <div>Loading...</div>}
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.fetchFolderNames();
   }
 
   fetchFolderNames() {

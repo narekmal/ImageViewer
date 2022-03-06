@@ -14,7 +14,6 @@ class Images extends Component {
   constructor(props:any) {
     super(props);
     this.folder = props.params.folder;
-    this.fetchImageInfo();
   }
 
   render() {
@@ -43,6 +42,10 @@ class Images extends Component {
         <div>Loading...</div>}
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.fetchImageInfo();
   }
 
   fetchImageInfo() {
