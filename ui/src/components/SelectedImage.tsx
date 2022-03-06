@@ -25,6 +25,7 @@ export default class SelectedImage extends Component<IProps> {
         <div className="image-container">
           <div className="image-wrapper">
             <img 
+              className={this.props.width == -1 ? "svg" : ""}
               src={this.constructImageUrl()} 
               onWheel={this.handleWheel.bind(this)} 
               onMouseMove={this.handleMouseMove.bind(this)} 
@@ -65,8 +66,8 @@ export default class SelectedImage extends Component<IProps> {
     var height = this.props.height;
     var xShift = e.clientX - this.imageEl.offsetLeft - width/2;
     var yShift = e.clientY - this.imageEl.offsetTop - height/2;
-    var outerWidth = width * (this.scale-1);
-    var outerHeight = height * (this.scale-1);
+    var outerWidth = this.props.name?.endsWith("svg") ? 200 : width * (this.scale-1);
+    var outerHeight = this.props.name?.endsWith("svg") ? 200 : height * (this.scale-1);
     var translateX = Math.min(Math.max(-outerWidth/(2*this.scale), xShift), outerWidth/(2*this.scale));
     var translateY = Math.min(Math.max(-outerHeight/(2*this.scale), yShift), outerHeight/(2*this.scale));
 

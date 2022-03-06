@@ -66,6 +66,7 @@ public class MainController : ControllerBase
         string imageName = HttpContext.Request.Query["image"].ToString();
         string wwwRootPath = Directory.GetCurrentDirectory();
         var image = System.IO.File.OpenRead(wwwRootPath + "\\root-folder\\" + folder + "\\" + imageName);
-        return File(image, "image/jpeg");
+        string contentType = imageName.EndsWith("svg") ? "image/svg+xml" : "image/jpeg";
+        return File(image, contentType);
     }
 }

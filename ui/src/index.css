@@ -30,6 +30,11 @@ code {
   margin-top: 25px;
 }
 
+.selected-image img.svg{
+  width: 200px;
+  height: 200px;
+}
+
 .initial-state {
   margin-right: 15px;
 }

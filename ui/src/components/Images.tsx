@@ -24,7 +24,7 @@ class Images extends Component {
             href=""
             onClick={e=>{this.setState({selectedImage: {name: info.item1, width: info.item2, height: info.item3}}); e.preventDefault();}}
             >
-            {info.item1} ({info.item2}x{info.item3})
+            {info.item1} {this.getDimensionsString(info.item2, info.item3)}
           </a>
       </div>);
 
@@ -55,6 +55,12 @@ class Images extends Component {
         this.setState({imageInfo: json});
       })
       .catch(err => console.log(err));
+  }
+
+  getDimensionsString(width: string, height: string) {
+    if (width == "-1")
+      return "";
+    return `(${width}x${height})`;
   }
 }
 
