@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Constants from "../Constants";
 
 interface IProps {
   folder?: string
@@ -50,15 +51,15 @@ export default class SelectedImage extends Component<IProps> {
   constructImageUrl(forDownload = false) {
     let url = `/Main/Image?folder=${this.props.folder}&image=${this.props.name}`;
     if (forDownload)
-      url = "https://localhost:7116" + url;
+      url = Constants.ApiAbsoluteUrl + url;
     return url;
   }
 
   handleWheel(e:any) {
-    this.scale += e.deltaY * -0.01;
+    this.scale += e.deltaY * -Constants.ImageScaleDelta;
 
     // Restrict scale
-    this.scale = Math.min(Math.max(1, this.scale), 4);
+    this.scale = Math.min(Math.max(1, this.scale), Constants.ImageMaxScale);
 
     // Apply scale transform
     e.target.style.transform = `scale(${this.scale})`;
@@ -71,12 +72,12 @@ export default class SelectedImage extends Component<IProps> {
     if(!this.imageEl || !this.props.width || !this.props.height)
       return;
 
-    var width = this.props.width;
-    var height = this.props.height;
+    var width = this.props.name?.endsWith("svg") ? Constants.SvgDisplaySize : this.props.width;
+    var height = this.props.name?.endsWith("svg") ? Constants.SvgDisplaySize : this.props.height;
     var xShift = e.clientX - this.imageEl.offsetLeft - width/2;
     var yShift = e.clientY - this.imageEl.offsetTop - height/2;
-    var outerWidth = this.props.name?.endsWith("svg") ? 200 : width * (this.scale-1);
-    var outerHeight = this.props.name?.endsWith("svg") ? 200 : height * (this.scale-1);
+    var outerWidth = width * (this.scale-1);
+    var outerHeight = height * (this.scale-1);
     var translateX = Math.min(Math.max(-outerWidth/(2*this.scale), xShift), outerWidth/(2*this.scale));
     var translateY = Math.min(Math.max(-outerHeight/(2*this.scale), yShift), outerHeight/(2*this.scale));
 

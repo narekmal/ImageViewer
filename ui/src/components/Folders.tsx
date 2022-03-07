@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Constants from '../Constants';
 
 export default class Folders extends Component {
 
   state = {
     folderNames: [],
-    foldersLimit: 10
+    foldersLimit: Constants.DefaultFoldersLimit
   }
 
   constructor(props:any) {
