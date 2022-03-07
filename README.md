@@ -6,7 +6,7 @@
 
 ## Implementation details
 * API (ASP.NET Core MVC) and UI (React) projects are resided in different directories
-* Logging functionality provided by .NET Generic Host in ASP.NET Core is used 
+* Serilog is used for writing logs to file 
 * ASP.NET Core Windows compatibility pack is used for reading image dimensions
-* Blacklist is implemented with nlogm algorithm (n-number of folders, m-number of blacklist file lines)
+* Blacklist is implemented with *nlogm* algorithm (n-number of folders, m-number of blacklist file lines)
 * React router is used
