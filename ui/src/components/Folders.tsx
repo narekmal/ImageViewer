@@ -43,7 +43,7 @@ export default class Folders extends Component {
 
   fetchFolderNames() {
     this.setState({folderNames: []});
-    fetch(`/Main/Folders?folders_limit=${this.state.foldersLimit}`, {
+    fetch(`/Main/Folders?${Constants.FoldersLimitQueryParam}=${this.state.foldersLimit}`, {
         method: 'GET'
       })
       .then(res => res.json())

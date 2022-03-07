@@ -49,7 +49,7 @@ export default class SelectedImage extends Component<IProps> {
   }
 
   constructImageUrl(forDownload = false) {
-    let url = `/Main/Image?folder=${this.props.folder}&image=${this.props.name}`;
+    let url = `/Main/Image?${Constants.FolderQueryParam}=${this.props.folder}&${Constants.ImageQueryParam}=${this.props.name}`;
     if (forDownload)
       url = Constants.ApiAbsoluteUrl + url;
     return url;

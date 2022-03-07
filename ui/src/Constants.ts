@@ -3,5 +3,8 @@ export default {
     ApiAbsoluteUrl: "https://localhost:7116",
     ImageMaxScale: 4,
     ImageScaleDelta: 0.01,
-    SvgDisplaySize: 400
+    SvgDisplaySize: 400,
+    FoldersLimitQueryParam: "folders_limit",
+    FolderQueryParam: "folder",
+    ImageQueryParam: "image"
 }

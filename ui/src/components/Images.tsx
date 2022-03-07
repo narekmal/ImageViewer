@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SelectedImage from './SelectedImage';
+import Constants from '../Constants';
 
 class Images extends Component {
 
@@ -50,7 +51,7 @@ class Images extends Component {
 
   fetchImageInfo() {
     this.setState({imageInfo: []});
-    fetch(`/Main/Images?folder=${this.folder}`, {
+    fetch(`/Main/Images?${Constants.FolderQueryParam}=${this.folder}`, {
         method: 'GET'
       })
       .then(res => res.json())
